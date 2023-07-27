@@ -20,4 +20,11 @@ interface EloquentRepositoryInterface
      * @return Illuminate\Database\Eloquent\Collection
      */
     public function find(mixed $id): Collection;
+
+    /**
+     * @param array $attributes
+     * 
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function where(array $attributes): Collection;
 }

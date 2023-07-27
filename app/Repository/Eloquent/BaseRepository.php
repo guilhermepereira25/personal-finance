@@ -32,4 +32,9 @@ class BaseRepository implements EloquentRepositoryInterface
     {
         return $this->model->find($id);
     }
+
+    public function where(array $attributes): Collection
+    {
+        return $this->model->where($attributes)->get();
+    }
 }
