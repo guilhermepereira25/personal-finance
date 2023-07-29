@@ -40,7 +40,8 @@ class UserControllerTest extends TestCase
         $response
             ->assertStatus(201)
             ->assertJson([
-                'message' => 'User created successfully'
+                'message' => 'User created successfully',
+                'user' => $this->data
             ]);
         $this->assertDatabaseHas('users', $this->data);
     }
