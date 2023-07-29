@@ -21,11 +21,12 @@ class UserController extends Controller
         $validated = $request->validated();
 
         if (!is_null($validated)) {
-            $this->userRepository->createUser($validated);
+            $user = $this->userRepository->createUser($validated);
         }
 
         return response()->json([
-            'message' => 'User created successfully'
+            'message' => 'User created successfully',
+            'user' => $user->getAttributes()
         ], 201);
     }
 
