@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -18,6 +19,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/', function () {
-    return Inertia::render('Test'); 
-});
+Route::post('/user', [UserController::class, 'store']);
+Route::get('/user/{id}', [UserController::class, 'show']);
