@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Repository\Eloquent;
+namespace App\Repositories\Eloquent;
 
 use App\Models\User;
-use App\Repository\UserRepositoryInterface;
-use App\Repository\Eloquent\BaseRepository;
+use App\Repositories\UserRepositoryInterface;
+use App\Repositories\Eloquent\BaseRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
