@@ -2,40 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Adapters\ViewModels\HttpResponseViewModel;
+use App\Domain\UseCases\CreateUser\CreateUserInputPort;
+use App\Domain\UseCases\CreateUser\CreateUserRequestModel;
 use App\Http\Requests\StoreUserRequest;
-use App\Models\User;
-use App\Repository\UserRepositoryInterface;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    private UserRepositoryInterface $userRepository;
-
-    public function __construct(UserRepositoryInterface $userRepository)
+    public function __construct(
+        private CreateUserInputPort $interactor
+    )
     {
-        $this->userRepository = $userRepository;
     }
 
     public function store(StoreUserRequest $request)
     {
-        $validated = $request->validated();
+        $viewModel = $this->interactor->createUser(
+            new CreateUserRequestModel($request->validated())
+        );
 
-        if (!is_null($validated)) {
-            $user = $this->userRepository->createUser($validated);
+        if ($viewModel instanceof HttpResponseViewModel) {
+            return $viewModel->getResponse();
         }
 
-        return response()->json([
-            'message' => 'User created successfully',
-            'user' => $user->getAttributes()
-        ], 201);
-    }
-
-    public function show(Request $request)
-    {
-        $user = $this->userRepository->findUser($request->id);
-
-        return response()->json([
-            'data' => $user->getAttributes()
-        ], 200);
+        return null;
     }
 }
