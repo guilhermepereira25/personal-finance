@@ -33,4 +33,9 @@ class BaseRepository implements EloquentRepository
     {
         return $this->model->where($attributes)->get();
     }
+
+    public function exists(array $attributes): bool
+    {
+        return $this->model->where($attributes)->exists();
+    }
 }
