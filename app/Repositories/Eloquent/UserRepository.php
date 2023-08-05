@@ -26,9 +26,13 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return $this->model->all();
     }
 
-    public function createUser(array $attributes): Model
+    public function createUser(UserEntity $user): UserEntity
     {
-        return $this->model->create($attributes);
+        return $this->model::create([
+            'user_name' => $user->getName(),
+            'user_email' => $user->getEmail(),
+            'user_password' => $user->getPassword(),
+        ]);
     }
 
     public function findUser(string $id): ?Model
