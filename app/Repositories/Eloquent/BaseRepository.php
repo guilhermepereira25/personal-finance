@@ -2,25 +2,21 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Repositories\EloquentRepositoryInterface;
+use App\Domain\Interfaces\EloquentRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class BaseRepository implements EloquentRepositoryInterface
+class BaseRepository implements EloquentRepository
 {
-    /**
-     * @var Model
-     */
-    protected $model;
-
     /**
      * BaseRepository constructor
      * 
      * @param Model $model
      */
-    public function __construct(Model $model)
+    public function __construct(
+        protected Model $model
+    )
     {
-        $this->model = $model;
     }
 
     public function create(array $attributes): Model
