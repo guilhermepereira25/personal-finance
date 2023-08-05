@@ -44,4 +44,12 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         return $this->model->where($attributes);
     }
+
+    public function existsUser(UserEntity $user): bool
+    {
+        return $this->exists([
+            'name' => $user->getName(),
+            'email' => (string) $user->getEmail()
+        ]);
+    }
 }
