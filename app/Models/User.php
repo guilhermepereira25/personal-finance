@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Casts\EmailValueObject;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -68,6 +69,7 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
+        'user_email' => EmailValueObject::class,
         'user_email_verified_at' => 'datetime',
         'user_password' => 'hashed',
     ];
