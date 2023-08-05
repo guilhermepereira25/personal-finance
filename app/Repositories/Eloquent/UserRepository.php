@@ -2,8 +2,9 @@
 
 namespace App\Repositories\Eloquent;
 
+use App\Domain\Interfaces\UserEntity;
 use App\Models\User;
-use App\Repositories\UserRepositoryInterface;
+use App\Domain\Interfaces\UserRepository as UserRepositoryInterface;
 use App\Repositories\Eloquent\BaseRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
