@@ -7,6 +7,7 @@ use App\Domain\UseCases\RegisteredUser\RegisteredUserInputPort;
 use App\Domain\UseCases\RegisteredUser\RegisteredUserRequestModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
@@ -32,7 +33,7 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(StoreUserRequest $request): InertiaResponse | Response
+    public function store(StoreUserRequest $request): InertiaResponse | Response | RedirectResponse
     {
         $viewModel = $this->interactor->registeredUser(
             new RegisteredUserRequestModel($request->validated())
