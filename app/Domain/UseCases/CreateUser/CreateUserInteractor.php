@@ -20,8 +20,8 @@ class CreateUserInteractor implements CreateUserInputPort
     public function createUser(CreateUserRequestModel $request): ViewModel
     {
         $user = $this->userFactory->make([
-            'user_name' => $request->getName(),
-            'user_email' => $request->getEmail(),
+            'name' => $request->getName(),
+            'email' => $request->getEmail(),
         ]);
 
         if ($this->userRepository->existsUser($user)) {

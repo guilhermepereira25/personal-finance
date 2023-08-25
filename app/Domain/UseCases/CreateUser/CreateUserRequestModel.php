@@ -12,17 +12,17 @@ class CreateUserRequestModel
 
     public function getName(): string
     {
-        return $this->attributes['user_name'];
+        return $this->attributes['name'];
     }
 
     public function getEmail(): string
     {
-        return $this->attributes['user_email'];
+        return $this->attributes['email'];
     }
 
     public function getPassword(): string
     {
-        return $this->attributes['user_password'];
+        return $this->attributes['password'];
     }
 
     public function getAttribute(string $key): string
