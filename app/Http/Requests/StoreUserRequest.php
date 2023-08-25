@@ -22,9 +22,9 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_name' => 'required',
-            'user_email' => 'required',
-            'user_password' => 'required|min:8'
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required|min:8'
         ];
     }
 
@@ -35,10 +35,10 @@ class StoreUserRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'user_name.required' => 'User name is required',
-            'user_email.required' => 'User email is required',
-            'user_password.required' => 'User password is required',
-            'user_password.min' => 'User password must be at least 8 characters'
+            'name.required' => 'User name is required',
+            'email.required' => 'User email is required',
+            'password.required' => 'User password is required',
+            'password.min' => 'User password must be at least 8 characters'
         ];
     }
 }
