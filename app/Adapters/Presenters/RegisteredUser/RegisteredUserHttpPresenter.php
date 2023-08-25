@@ -24,21 +24,14 @@ class RegisteredUserHttpPresenter implements RegisteredUserOutputPort
     public function userNotRegistered(RegisteredUserResponseModel $response): ViewModel
     {
         return new HttpResponseViewModel(
-            Inertia::render(
-                'Auth/Register',
-                [
-                    'errors' => [
-                        'messagae' => 'Error registering user',
-                    ]
-                ]
-            )
+            redirect()->back()->withErrors('Error registering user')
         );
     }
 
     public function userAlreadyExists(RegisteredUserResponseModel $response): ViewModel
     {
         return new HttpResponseViewModel(
-            Inertia::render('Auth/Login')
+            redirect('login')
         );
     }
 }

@@ -9,7 +9,7 @@ use Inertia\Response as InertiaResponse;
 
 class HttpResponseViewModel implements ViewModel
 {   
-   private Response | InertiaResponse $response; 
+   private Response | InertiaResponse | RedirectResponse $response; 
 
     public function __construct(
         Response | InertiaResponse | RedirectResponse $response
@@ -28,7 +28,7 @@ class HttpResponseViewModel implements ViewModel
         }
     }
 
-    public function getResponse(): Response | InertiaResponse
+    public function getResponse(): Response | InertiaResponse | RedirectResponse
     {
         return $this->response;
     }
