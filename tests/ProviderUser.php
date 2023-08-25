@@ -12,9 +12,9 @@ trait ProviderUser
         return [
             [
                 [
-                    'user_name' => fake()->name(),
-                    'user_email' => fake()->email(),
-                    'user_password' => fake()->password()
+                    'name' => fake()->name(),
+                    'email' => fake()->email(),
+                    'password' => fake()->password()
                 ]
             ]
         ];
@@ -22,7 +22,7 @@ trait ProviderUser
 
     public function assertUserCreated(array $data, UserEntity $user)
     {
-        $this->assertEquals($user->getName(), $data['user_name']);
-        $this->assertEquals($user->getEmail(), $data['user_email']);
+        $this->assertEquals($user->getName(), $data['name']);
+        $this->assertEquals($user->getEmail(), $data['email']);
     }
 }

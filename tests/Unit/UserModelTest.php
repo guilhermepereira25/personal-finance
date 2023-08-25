@@ -22,24 +22,24 @@ class UserModelTest extends TestCase
         parent::setUp();
 
         $this->userFactory = User::factory()->create();
-        $this->user = User::findOrFail($this->userFactory->user_id);
+        $this->user = User::findOrFail($this->userFactory->id);
     }
 
     public function test_that_user_is_created(): void
     {
         $this->assertDatabaseCount('users', 1);
-        $this->assertSame($this->user->user_id, $this->userFactory->user_id);
-        $this->assertEquals($this->user->user_name, $this->userFactory->user_name);
-        $this->assertEquals($this->user->user_email, $this->userFactory->user_email);
+        $this->assertSame($this->user->id, $this->userFactory->id);
+        $this->assertEquals($this->user->name, $this->userFactory->name);
+        $this->assertEquals($this->user->email, $this->userFactory->email);
     }
 
-    public function test_update_user_email(): void
+    public function test_update_email(): void
     {
         $newEmail = 'new_email@email.com';
 
-        $this->user->user_email = $newEmail;
+        $this->user->email = $newEmail;
         $this->user->update(); 
 
-        $this->assertEquals($newEmail, $this->user->user_email);
+        $this->assertEquals($newEmail, $this->user->email);
     }
 }

@@ -39,11 +39,11 @@ class CreateUserUseCaseTest extends TestCase
         return tap($this->mock(UserEntity::class), function (MockInterface $mock) use ($data) {
             $mock
                 ->shouldReceive('getName')
-                ->andReturn($data['user_name']);
+                ->andReturn($data['name']);
 
             $mock
                 ->shouldReceive('getEmail')
-                ->andReturn($data['user_email']);
+                ->andReturn($data['email']);
         });
     }
 
@@ -97,15 +97,15 @@ class CreateUserUseCaseTest extends TestCase
         return tap($this->mock(CreateUserRequestModel::class), function (MockInterface $mock) use ($data) {
             $mock
                 ->shouldReceive('getName')
-                ->andReturn($data['user_name']);
+                ->andReturn($data['name']);
 
             $mock
                 ->shouldReceive('getEmail')
-                ->andReturn($data['user_email']);
+                ->andReturn($data['email']);
             
             $mock
                 ->shouldReceive('getPassword')
-                ->andReturn($data['user_password']);
+                ->andReturn($data['password']);
         });
     }
 }
