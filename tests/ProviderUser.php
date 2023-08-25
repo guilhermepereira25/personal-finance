@@ -14,7 +14,7 @@ trait ProviderUser
                 [
                     'name' => fake()->name(),
                     'email' => fake()->email(),
-                    'password' => fake()->password()
+                    'password' => fake()->password(8)
                 ]
             ]
         ];
