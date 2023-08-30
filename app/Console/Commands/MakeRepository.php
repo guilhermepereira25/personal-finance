@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Nette\PhpGenerator\{PhpNamespace, ClassType, PhpFile};
+use Nette\PhpGenerator\{PhpNamespace, ClassType};
 
 
 class MakeRepository extends Command
@@ -46,24 +46,17 @@ class MakeRepository extends Command
 
         $filename = $name . 'Repository.php';
         $file = fopen($path . $filename, 'w');
-        fwrite($file, $this->formatCodeStructure($name, $orm));
+        fwrite($file, $this->getRepositoryClassStructure($name, $orm));
         fclose($file);
 
         $this->info('Repository created successfully.');
     }
 
-    /**
-     * Format the code structure for the repository.
-     *
-     * @param string $name The name of the repository.
-     * @param string $orm The ORM to be used.
-     * @return string The formatted code structure.
-     */
-    private function formatCodeStructure(string $name, string $orm): string
+    private function getRepositoryClassStructure(string $className, string $orm): string
     {
         $phpTag = "<?php \n\n";
 
-        $class = new ClassType($name . 'Repository');
+        $class = new ClassType($className . 'Repository');
         $class
             ->setExtends("App\Repositories\\{$orm}\BaseRepository")
             ->addComment('Auto generated repository.');
