@@ -38,7 +38,7 @@ class MakeRepository extends Command
         $name = $this->argument('name');
         $orm = $this->choice('Which ORM do you use?', $this->orms, 0);
         
-        $path = app_path('Repositories/' . $this->orms[$orm] . '/');
+        $path = app_path('Repositories/' . $orm . '/');
 
         if (! file_exists($path)) {
             mkdir(dirname($path), 0777, true);
@@ -46,7 +46,7 @@ class MakeRepository extends Command
 
         $filename = $name . 'Repository.php';
         $file = fopen($path . $filename, 'w');
-        fwrite($file, $this->formatCodeStructure($name, $this->orms[$orm]));
+        fwrite($file, $this->formatCodeStructure($name, $orm));
         fclose($file);
 
         $this->info('Repository created successfully.');
@@ -70,7 +70,6 @@ class MakeRepository extends Command
 
         $namespace = new PhpNamespace('App\Repositories\\' . $orm);
         $namespace->add($class);
-        $namespace->addUse("Repositories\\{$orm}\BaseRepository");
 
         return $phpTag . (string) $namespace;
     }
