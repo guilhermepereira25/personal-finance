@@ -4,14 +4,17 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Casts\EmailValueObject;
+use App\Domain\Interfaces\UserEntity;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements UserEntity
 {
     use HasApiTokens, HasFactory, Notifiable, HasUuids;
 
@@ -22,23 +25,22 @@ class User extends Authenticatable
      */
     protected $table = 'users';
 
-    protected $primaryKey = 'user_id';
     public $incrementing = false;
     protected $keyType = 'string';
 
     public function transaction(): HasMany
     {
-        return $this->hasMany(Transaction::class, 'user_id', 'user_id');
+        return $this->hasMany(Transaction::class, 'user_id', 'id');
     }
 
     public function goal(): HasMany
     {
-        return $this->hasMany(Goal::class, 'user_id', 'user_id');
+        return $this->hasMany(Goal::class, 'user_id', 'id');
     }
     
     public function budget(): HasMany
     {
-        return $this->hasMany(Budget::class, 'user_id', 'user_id');
+        return $this->hasMany(Budget::class, 'user_id', 'id');
     }
 
     /**
@@ -47,9 +49,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'user_name',
-        'user_email',
-        'user_password',
+        'name',
+        'email',
+        'password',
     ];
 
     /**
@@ -58,7 +60,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'user_password',
+        'password',
         'remember_token',
     ];
 
@@ -68,7 +70,43 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'user_email_verified_at' => 'datetime',
-        'user_password' => 'hashed',
+        'email' => EmailValueObject::class,
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
     ];
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function getAuthPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    public function setPassword(string $password): void
+    {
+        $this->password = Hash::make($password);
+    }
 }
