@@ -19,7 +19,7 @@ class MakeRepositoryTest extends TestCase
         $orm = 'Eloquent';
 
         $this->artisan("make:repository", ['name' => $name])
-             ->expectsQuestion('Which ORM do you use?', 0)
+             ->expectsQuestion('Which ORM do you use?', $orm)
              ->assertExitCode(0);
 
         $fileName = $name . $this->sufix;
